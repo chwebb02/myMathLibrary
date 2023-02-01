@@ -28,9 +28,11 @@ int main() {
     M_assignMatrix2D(A, arrayA);
     M_assignMatrix2D(B, arrayB);
 
+    M_setElement(A, (unsigned int []) {3, 3}, 100);
+
     printf("assignMatrix2D test:\nA:\n");
     for (int row = 1; row <= M_getDimension(A, 1); row++) {
-        for (int column = 2; column <= M_getDimension(A, 2); column++) {
+        for (int column = 1; column <= M_getDimension(A, 2); column++) {
             printf("%d ", M_getElement(A, (unsigned int []) {row, column}));
         } 
         printf("\n");
@@ -38,7 +40,7 @@ int main() {
 
     printf("\nB:\n");
     for (int row = 1; row <= M_getDimension(B, 1); row++) {
-        for (int column = 2; column <= M_getDimension(B, 2); column++) {
+        for (int column = 1; column <= M_getDimension(B, 2); column++) {
             printf("%d ", M_getElement(B, (unsigned int []) {row, column}));
         } 
         printf("\n");
@@ -48,12 +50,21 @@ int main() {
 
     printf("\n\nM_add test:\n");
     for (int row = 1; row <= M_getDimension(C, 1); row++) {
-        for (int column = 2; column <= M_getDimension(C, 2); column++) {
+        for (int column = 1; column <= M_getDimension(C, 2); column++) {
             printf("%d ", M_getElement(C, (unsigned int []) {row, column}));
         } 
         printf("\n");
     }
 
+    Matrix *D = M_subtract(A, B);
+
+    printf("\n\nM_subtract test:\n");
+    for (int row = 1; row <= M_getDimension(D, 1); row++) {
+        for (int column = 1; column <= M_getDimension(D, 2); column++) {
+            printf("%d ", M_getElement(D, (unsigned int []) {row, column}));
+        } 
+        printf("\n");
+    }
 
     return 0;
 }

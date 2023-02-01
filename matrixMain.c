@@ -1,8 +1,8 @@
 #ifndef MATRIX_MAIN
 #define MATRIX_MAIN
 
-#include "matrix.h"
 #include "matrixDef.h"
+#include "matrix.h"
 
 #include <stdlib.h>
 #include <limits.h>
@@ -30,20 +30,12 @@ unsigned long translate(Matrix *input, unsigned int *location) {
     if (location == NULL)
         return input->max + 1;
     
-    unsigned long output = location[0] - 1;
-
-    // Apply offset for dimensions > 1
+    unsigned long index = location[0] - 1;
     for (int i = 1; i < input->dimc; i++) {
-        unsigned long offset = 1;
-
-        for (int j = i; j > 0; j--) {
-            offset *= input->dimensions[j - 1];
-        }
-
-        output += offset * (location[i] - 1);
+        index += input->dimOffsets[i - 1] * (location[i] - 1);
     }
 
-    return output;
+    return index;
 }
 
 Matrix *newMatrix(unsigned int dimc, unsigned int *dimensions) {
@@ -73,6 +65,25 @@ Matrix *newMatrix(unsigned int dimc, unsigned int *dimensions) {
         return NULL;
     }
     output->max -= 1;
+
+    output->dimOffsets = malloc ((dimc - 1) * sizeof(unsigned int));
+    if (output->dimOffsets == NULL) {
+        free(output->matrix);
+        free(output->dimensions);
+        free(output);
+        return NULL;
+    }
+
+    // Assign the dimension offsets
+    for (int i = 1; i < output->dimc; i++) {
+        unsigned long offset = 1;
+
+        for (int j = i; j > 0; j--) {
+            offset *= output->dimensions[j - 1];
+        }
+
+        output->dimOffsets[i - 1] = offset;
+    }
 
     return output;
 }

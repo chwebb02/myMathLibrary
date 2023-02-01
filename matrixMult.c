@@ -1,8 +1,8 @@
 #ifndef MATRIX_MULT
 #define MATRIX_MULT
 
-#include "matrix.h"
 #include "matrixDef.h"
+#include "matrix.h"
 
 #include <stdlib.h>
 

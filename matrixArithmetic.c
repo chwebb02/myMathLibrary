@@ -1,12 +1,13 @@
 #ifndef MATRIX_ARITHMETIC
 #define MATRIX_ARITHMETIC
 
-#include "matrix.h"
 #include "matrixDef.h"
+#include "matrix.h"
 
 #include <stdlib.h>
 
-Matrix *M_add(Matrix *A, Matrix *B) {
+// Checks error conditions for matrix operations
+Matrix *checkConditions(Matrix *A, Matrix *B) {
     if (A->dimc != B->dimc)
         return NULL;
     
@@ -18,9 +19,29 @@ Matrix *M_add(Matrix *A, Matrix *B) {
     Matrix *output = newMatrix(A->dimc, A->dimensions);
     if (output == NULL)
         return NULL;
+    
+    return output;
+}
 
-    for (int i = 1; i <= A->max; i++) {
+Matrix *M_add(Matrix *A, Matrix *B) {
+    Matrix *output = checkConditions(A, B);
+    if (output == NULL)
+        return NULL;
+
+    for (int i = 0; i <= A->max; i++) {
         output->matrix[i] = A->matrix[i] + B->matrix[i];
+    }
+
+    return output;
+}
+
+Matrix *M_subtract(Matrix *A, Matrix *B) {
+    Matrix *output = checkConditions(A, B);
+        if (output == NULL)
+            return NULL;
+        
+    for (int i = 0; i <= A->max; i++) {
+        output->matrix[i] = A->matrix[i] - B->matrix[i];
     }
 
     return output;

@@ -1,5 +1,5 @@
 default : main.o matrix.o
-	cc -o main.o matrixMain.o matrixArithmetic.o matrixMult.o
+	cc -o test main.o matrixMain.o matrixArithmetic.o matrixMult.o
 
 main.o : main.c matrix.h
 	cc -c main.c

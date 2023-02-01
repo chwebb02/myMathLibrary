@@ -1,5 +1,5 @@
 #ifndef MATRIX_H
-#define MATRIX_H
+#define MATRIX_H 1
 
 typedef struct matrixStruct Matrix;
 
