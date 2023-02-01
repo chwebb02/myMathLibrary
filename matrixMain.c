@@ -5,6 +5,7 @@
 #include "matrixDef.h"
 
 #include <stdlib.h>
+#include <limits.h>
 
 /*
     Translates from:

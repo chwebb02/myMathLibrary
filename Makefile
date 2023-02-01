@@ -1,13 +1,10 @@
-main : main.c lib.o
-	cc -o main main.c lib.o
+default : main.o matrix.o
+	cc -o main.o matrixMain.o matrixArithmetic.o matrixMult.o
 
-lib : matrixMain.o matrixMult.o
-	cc -c lib matrixMain.o matrixMult.o
-
-matrixMain.o : matrixMain.c matrix.h matrixDef.h
-	cc -c matrixMain.c
-matrixMult.o : matrixMult.c matrix.h matrixDef.h
-	cc -c matrixMult.c
+main.o : main.c matrix.h
+	cc -c main.c
+matrix.o : matrixMain.c matrixArithmetic.c matrix.h matrixDef.h
+	cc -c matrixMain.c matrixArithmetic.c matrixMult.c
 
 clean :
-	rm matrixMain.o matrixMult.o
+	rm *.o

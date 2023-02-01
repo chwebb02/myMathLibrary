@@ -1,0 +1,5 @@
+.vscode/
+
+# binaries
+*.exe
+*.out
